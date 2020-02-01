@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'price/css/login.css' %}">
+  </head>
+  <body>
+    {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">{{message}}</div>
+                {% endfor %}
+
+              {% endif %}
+    <div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Sign In </h2>
+
+    <!-- Icon -->
+
+
+    <!-- Login Form -->
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.email }}<br>
+      {{form.password1}}<br>
+      {{form.password2}}
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="{% url 'login' %}">Already Have an account? Log in</a>
+    </div>
+
+  </div>
+</div>
+  </body>
+</html>
