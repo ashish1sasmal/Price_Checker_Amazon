@@ -19,7 +19,7 @@ from .forms import UserForm,ProfileForm
 @login_required
 def user_logout(request):
     logout(request)
-    redirect('home')
+    return redirect('home')
 
 
 
