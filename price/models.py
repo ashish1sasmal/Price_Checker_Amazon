@@ -9,8 +9,9 @@ class Profile(models.Model):
         return f'{self.user.email}'
 
 class Products(models.Model):
-    user = models.ForeignKey(Profile,on_delete = models.CASCADE)
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
     url = models.URLField()
     title = models.TextField(default='')
+    price = models.DecimalField(max_digits=20, decimal_places=2)
     def __str__(self):
         return f'{self.user.email}'

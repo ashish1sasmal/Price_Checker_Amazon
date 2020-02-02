@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile,Products
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -17,24 +17,24 @@ from .forms import UserForm
 @login_required
 def user_logout(request):
     logout(request)
-    return redirect('home')
+    redirect('home')
 
+@login_required
 def price(request):
     if request.method == "POST":
-        email = request.POST.get('email')
         url = request.POST.get('url')
         print(url)
-        check=Profile.objects.filter(email=email).exists()
-        # if not check:
-        #     form = Profile(email=email)
-        #     form.save()
-        #     prod = Products(user=form,url=url)
-        #     prod.save()
-        price = checkprice(url)
-        send_email(price,email)
+        detail=checkprice(url)
+        title = detail[0]
+        price=float(detail[1][2:].replace(',', ''))
+        print(price)
+        form=Products(user=request.user,title=title,price=price,url=url)
+        form.save()
+        print("product detail saved successfully!")
+        send_email(detail,request.user.email)
 
 
-    return render(request,'price/index.html')
+    return render(request,'price/price.html')
 
 def home(request):
     return render(request,"price/base.html")
