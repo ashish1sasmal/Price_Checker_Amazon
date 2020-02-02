@@ -39,7 +39,7 @@ def priceloop():
             new_price=float(detail[1][2:].replace(',',''))
             if old_price<=new_price:
                 print("grab the deal")
-                send_email("Hurry! Price dropped Grab the deal","Current price of "+detail[0]+" is "+detail[1],product.user.email)
+                send_email("Hurry! Price dropped Grab the deal","Current price of "+detail[0]+" is "+detail[1]+"  \n"+product.url,product.user.email)
 
 
 @login_required
