@@ -16,3 +16,13 @@ class UserForm(UserCreationForm):
 		self.fields['email'].widget = forms.EmailInput(attrs={'class': 'fadeIn second', 'placeholder': 'Email Address '})
 		self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'fadeIn third', 'placeholder': 'Enter Password '})
 		self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'fadeIn fourth', 'placeholder': 'Password confirmation'})
+
+class ProfileForm(forms.ModelForm):
+	mobile=forms.CharField()
+	class Meta():
+		model = Profile
+		fields=('mobile',)
+
+	def __init__(self, *args, **kwargs):
+		super(ProfileForm, self).__init__(*args, **kwargs)
+		self.fields['mobile'].widget = forms.TextInput(attrs={'class': 'fadeIn second', 'placeholder': 'Enter phone Number '})

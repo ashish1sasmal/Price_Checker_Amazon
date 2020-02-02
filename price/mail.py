@@ -23,13 +23,13 @@ from email.mime.multipart import MIMEMultipart
 
 
 
-def send_email(price,email_id):
+def send_email(subject,msg,email_id):
     message = MIMEMultipart("alternative")
-    message["Subject"] = "Current Price"
+    message["Subject"] = subject
 
 
     # Turn these into plain/html MIMEText objects
-    part1 = MIMEText("Current price of "+price[0]+" is "+price[1], "plain")
+    part1 = MIMEText(msg, "plain")
     message.attach(part1)
 
 

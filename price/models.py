@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete = models.CASCADE)
-
+    mobile=models.CharField(max_length=10)
     def __str__(self):
         return f'{self.user.email}'
 
@@ -14,4 +14,4 @@ class Products(models.Model):
     title = models.TextField(default='')
     price = models.DecimalField(max_digits=20, decimal_places=2)
     def __str__(self):
-        return f'{self.user.email}'
+        return f'{self.user.email} {self.title[:40]}'
