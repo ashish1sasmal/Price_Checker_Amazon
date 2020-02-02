@@ -11,6 +11,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
 
+from apscheduler.schedulers.background import BackgroundScheduler
+
 from .forms import UserForm
 # Create your views here.
 
@@ -18,6 +20,22 @@ from .forms import UserForm
 def user_logout(request):
     logout(request)
     redirect('home')
+
+url="https://www.amazon.in/HP-14-inch-Integrated-Graphics-14s-cs1000tu/dp/B07LDRVXKX/ref=sr_1_3?crid=37Y2A9EMNQ0NC&keywords=hp+laptops&qid=1580641783&sprefix=hp+la%2Caps%2C342&sr=8-3"
+
+def start():
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(priceloop, 'interval', minutes=1)
+    scheduler.start()
+
+
+def priceloop():
+    products=Products.objects.all()
+    for product in products:
+        checkprice(product.url)
+
+
+
 
 @login_required
 def price(request):
