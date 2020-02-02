@@ -9,6 +9,7 @@ from .amazon import checkprice
 from .mail import send_email
 from django.contrib.auth import authenticate
 from django.contrib.auth import login,logout
+from .whatsapp import whatsapp
 from django.contrib.auth.decorators import login_required
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -40,7 +41,7 @@ def priceloop():
             if old_price<=new_price:
                 print("grab the deal")
                 send_email("Hurry! Price dropped Grab the deal","Current price of "+detail[0]+" is "+detail[1]+"  \n"+product.url,product.user.email)
-
+                whatsapp("Hurry! Price dropped Grab the deal"+"Current price of "+detail[0]+" is "+detail[1]+"  \n"+product.url,product.user.profile.mobile)
 
 @login_required
 def price(request):
@@ -94,6 +95,7 @@ def register(request):
             profile.save()
             messages.success(request,"Your account has been created!")
             print("account created")
+
             send_email("Congratulations! Account created at PriceHawk","Click on this link to get notifications directon whatsapp == \n https://wa.me/14155238886?text=join%20note-outer",email)
             return redirect('home')
         else:
