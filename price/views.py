@@ -58,7 +58,7 @@ def price(request):
         print("product detail saved successfully!")
         messages.success(request,"product detail saved successfully!")
         send_email("Price Hawk","Current price of "+detail[0]+" is "+detail[1],request.user.email)
-        whatsapp("Price Hawk\n\n"+"Current price of "+detail[0]+" is "+detail[1],request.user.profile.mobile)
+        whatsapp("Price Hawk\n\n"+"Current price of "+detail[0]+" is "+detail[1]+"\n\n"+url,request.user.profile.mobile)
         return redirect('home')
 
     return render(request,'price/price.html')

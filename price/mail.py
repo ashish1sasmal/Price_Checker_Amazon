@@ -41,3 +41,5 @@ def send_email(subject,msg,email_id):
             EMAIL_ID, email_id, message.as_string()
         )
         print("email sent")
+
+    return

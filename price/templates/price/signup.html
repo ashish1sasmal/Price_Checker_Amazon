@@ -5,7 +5,15 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+
     <link rel="stylesheet" href="{% static 'price/css/login.css' %}">
+    <style media="screen">
+      .button5 {font-size: 24px;background-color: #555555;color: white;}
+.button:hover {
+  background-color: #4CAF50; /* Green */
+  color: yellow;
+}
+    </style>
   </head>
   <body>
     {% if messages %}
@@ -28,9 +36,10 @@
       {{ form.email }}<br>
       <input  id="login" class="fadeIn second" name="mobile" placeholder="Phone NUmber">
       {{form.password1}}<br>
-      {{form.password2}}
-      <input type="submit" class="fadeIn fourth" value="Log In">
-    </form>
+      {{form.password2}}<br><br>
+      <button type="submit" class="button5">SignUp</button>
+
+    </form><br>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">

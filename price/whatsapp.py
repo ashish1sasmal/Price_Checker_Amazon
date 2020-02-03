@@ -15,3 +15,4 @@ def whatsapp(msg,to_whatsapp_number):
                            from_=from_whatsapp_number,
                            to='whatsapp:+91'+to_whatsapp_number)
     print(" whatsapp message sent !")
+    return
