@@ -10,7 +10,7 @@ class Profile(models.Model):
 
 class Products(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)
-    url = models.TextField(default='')
+    url = models.CharField(max_length=500)
     title = models.TextField(default='')
     price = models.DecimalField(max_digits=20, decimal_places=2)
     def __str__(self):
