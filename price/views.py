@@ -4,7 +4,7 @@ from .models import Profile,Products
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import Profile
+from .models import Profile,ControlRoom
 from .amazon import checkprice
 from .mail import send_email
 from django.contrib.auth import authenticate
@@ -26,7 +26,7 @@ def user_logout(request):
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(priceloop, 'interval', minutes=10)
+    scheduler.add_job(priceloop, 'interval', minutes=ControlRoom.objects.first().interval)
     scheduler.start()
 
 
@@ -55,12 +55,17 @@ def price(request):
         form=Products(user=request.user,title=title,price=price,url=url)
         form.save()
         print("product detail saved successfully!")
+        messages.success(request,"product detail saved successfully!")
         send_email("Price Hawk","Current price of "+detail[0]+" is "+detail[1],request.user.email)
-
+        whatsapp("Price Hawk\n\n"+"Current price of "+detail[0]+" is "+detail[1],request.user.profile.mobile)
+        return redirect('home')
 
     return render(request,'price/price.html')
 
 def home(request):
+    # interval=ControlRoom.objects.first().interval
+    # print(interval.interval)
+    print(request.user)
     return render(request,"price/base.html")
 
 def user_login(request):
