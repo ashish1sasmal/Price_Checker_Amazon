@@ -26,7 +26,7 @@ def user_logout(request):
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(priceloop, 'interval', minutes=ControlRoom.objects.first().interval)
+    scheduler.add_job(priceloop, 'interval', minutes=10)
     scheduler.start()
 
 #ControlRoom.objects.first().interval
